@@ -1,0 +1,55 @@
+<%= form_for @barang, html: { multipart: true, class: 'form-horizontal' } do |f| %>
+    <% if @barang.errors.any? %>
+        <div id="errors">
+          <p>
+            <%= @barang.errors.count %>
+            Prevented this barang from savings
+          </p>
+          <ul>
+            <% @barang.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :nama, class:"col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :nama, class:"form-control" %>
+        </div>
+      </div>      
+      <div class="form-group">
+        <%= f.label :kategori_id, class:"col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.collection_select(:kategori_id, Kategori.all.order("nama ASC"), :id, :nama, {}, {class: "form-control", :prompt => false}) %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :status, class:"col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :status %>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+          <%= f.button :submit, class:"btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <%= f.fields_for :h_barangs do |hbarang| %>
+        <%= render "hbarang_fields", :f => hbarang %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% end %>

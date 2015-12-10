@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Reseller Class</h1>
+
+    <%= link_to "Tambah Reseller Class", new_r_class_path, class: "btn btn-primary" %>
+    <br/>
+    <br/>
+    <% @r_classes.each_slice(3) do |r_class| %>
+        <div class="row">
+          <% r_class.each do |rc| %>
+              <div class="col-md-4">
+                <div class="bs-callout bs-callout-info col-md-12" >
+                  <h2><%= rc.nama %></h2>
+
+                  <% if rc.status == true %>
+                      <span class="label label-success col-md-3"> Aktif </span>
+                  <% else %>
+                      <span class="label label-warning col-md-3"> Tidak Aktif </span>
+                  <% end %>
+                  <div class="col-md-offset-8">
+                    <%= link_to "Edit Reseller Class", edit_r_class_path(rc), class: "btn btn-info btn-xs" %>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<article ng-app="kategoris">
+  <div ng-view></div>
+</article>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>Kategori</h1>
+
+
+
+    <%= link_to "Tambah Kategori", new_kategori_path, class: "btn btn-primary" %>
+    <br/>
+    <br/>
+    <section class="search-form">
+    <%= form_for :kategoris, method: :get do |f| %>
+        <div class="input-group input-group-lg">
+          <%= label_tag :keywords, nil, class: "sr-only" %>
+          <%= text_field_tag :keywords, @keywords,
+                             placeholder: "Nama Kategori",
+                             class: "form-control input-lg" %>
+          <span class="input-group-btn">
+        <%= submit_tag "Search Kategori",
+                       class: "btn btn-primary btn-lg" %>
+      </span>
+        </div>
+    <% end %>
+    </section>
+    <section class="search-results">
+    <% @kategoris.each_slice(3) do |kategori| %>
+        <div class="row">
+          <% kategori.each do |kat| %>
+              <div class="col-md-4">
+                <div class="bs-callout bs-callout-info col-md-12" >
+                  <h2><%= kat.nama %></h2>
+
+                  <% if kat.status == true %>
+                      <span class="label label-success col-md-3"> Aktif </span>
+                  <% else %>
+                      <span class="label label-warning col-md-3"> Tidak Aktif </span>
+                  <% end %>
+                  <div class="col-md-offset-9">
+                    <%= link_to "Edit Kategori", edit_kategori_path(kat), class: "btn btn-info btn-xs" %>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+    <%= will_paginate @kategoris, renderer: BootstrapPagination::Rails, previous_label: 'Sebelumnya', next_label: 'Selanjutnya', inner_window: 2, outer_window: 0 %>
+    </section>
+
+  </div>
+</div>

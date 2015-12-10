@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Reseller</h1>
+
+    <%= link_to "Tambah Reseller", new_reseller_path, class: "btn btn-primary" %>
+    <br/>
+    <br/>
+    <% @resellers.each_slice(3) do |reseller| %>
+        <div class="row">
+          <% reseller.each do |res| %>
+              <div class="col-md-4">
+                <div class="bs-callout bs-callout-info" >
+                  <ul class="list-group">
+                    <li class="list-group-item">Nama: <%= res.nama %></li>
+                    <li class="list-group-item">Alamat: <%= res.alamat %></li>
+                    <li class="list-group-item">Telpon: <%= res.tlp %></li>
+                    <li class="list-group-item">Email: <%= res.email %></li>
+                    <li class="list-group-item">Reseller Class: <%= res.r_class.nama %></li>
+                  </ul>
+                  <% if res.status == true %>
+                      <span class="label label-success col-md-3"> Aktif </span>
+                  <% else %>
+                      <span class="label label-warning col-md-3"> Tidak Aktif </span>
+                  <% end %>
+                  <div class="col-md-offset-9">
+                    <%= link_to "Edit Reseller", edit_reseller_path(res), class: "btn btn-info btn-xs" %>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+    <%= will_paginate @resellers, renderer: BootstrapPagination::Rails, previous_label: 'Sebelumnya', next_label: 'Selanjutnya', inner_window: 2, outer_window: 0 %>
+
+  </div>
+</div>

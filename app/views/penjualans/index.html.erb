@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Penjualan</h1>
+
+    <%= link_to "Tambah Penjualan", new_penjualan_path, class: "btn btn-primary" %>
+    <br/>
+    <br/>
+    <% @penjualans.each_slice(3) do |penjualan| %>
+        <div class="row">
+          <% penjualan.each do |penj| %>
+              <div class="col-md-4">
+                <div class="bs-callout bs-callout-info" >
+                  <ul class="list-group">
+                    <li class="list-group-item">Tanggal: <%= penj.tanggal_penjualan %></li>
+                    <li class="list-group-item">Nama Reseller: <%= penj.nama_reseller %></li>
+                    <li class="list-group-item">Total Penjualan: <%= number_to_currency(penj.total_penjualan, unit: "Rp. ") %></li>
+                  </ul>
+                  <% if penj.status_penjualan == 1 %>
+                      <span class="label label-success col-md-3"> Belum Confirm </span>
+                  <% else %>
+                      <span class="label label-warning col-md-3"> Sudah Confirm</span>
+                  <% end %>
+                  <div class="col-md-offset-5">
+                    <%= link_to "Edit Penjualan", edit_penjualan_path(penj), class: "btn btn-info btn-xs" %>
+                    <%= link_to "View Penjualan", penjualan_path(penj), class: "btn btn-info btn-xs" %>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+    <%= will_paginate @penjualans, renderer: BootstrapPagination::Rails, previous_label: 'Sebelumnya', next_label: 'Selanjutnya', inner_window: 2, outer_window: 0 %>
+
+  </div>
+</div>

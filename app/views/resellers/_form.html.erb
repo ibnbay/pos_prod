@@ -1,0 +1,65 @@
+<%= form_for @reseller, html: { multipart: true, class: 'form-horizontal' } do |f| %>
+    <% if @reseller.errors.any? %>
+        <div id="errors">
+          <p>
+            <%= @reseller.errors.count %>
+            Prevented this kategori from savings
+          </p>
+          <ul>
+            <% @reseller.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="panel-body">
+      <div class="form-group">
+        <%= f.label :nama, class:"col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :nama, class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :alamat, class:"col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_area :alamat, row: "3", class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :tlp, class:"col-sm-3 control-label" %>
+        <div class="col-sm-9 input-group-sm">
+          <%= f.text_field :tlp, class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, class:"col-sm-3 control-label" %>
+        <div class="col-sm-9 input-group-sm">
+          <%= f.text_field :email, class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :r_class_id, class:"col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.collection_select(:r_class_id, @r_classes, :id, :nama, {}, {class: "form-control"}) %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :status, class:"col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :status %>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+          <%= f.button :submit, class:"btn btn-primary" %>
+        </div>
+      </div>
+
+    </div>
+
+<% end %>

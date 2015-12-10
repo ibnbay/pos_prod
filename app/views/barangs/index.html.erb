@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Barang</h1>
+
+    <%= link_to "Tambah Barang", new_barang_path, class: "btn btn-primary" %>
+    <br/>
+    <br/>
+    <% @barangs.each_slice(3) do |barang| %>
+        <div class="row">
+          <% barang.each do |brg| %>
+              <div class="col-md-4">
+                <div class="bs-callout bs-callout-info col-md-12" >
+                  <h2><%= brg.nama_barang %></h2>
+                  <blockquote><h4><%= brg.nama_kategori %></h4></blockquote>
+                  <% if brg.status_barang == true %>
+                      <span class="label label-success col-md-3"> Aktif </span>
+                  <% else %>
+                      <span class="label label-warning col-md-3"> Tidak Aktif </span>
+                  <% end %>
+                  <div class="col-md-offset-9">
+                    <%= link_to "Edit Barang", edit_barang_path(brg), class: "btn btn-info btn-xs" %>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+    <%= will_paginate @barangs, renderer: BootstrapPagination::Rails, previous_label: 'Sebelumnya', next_label: 'Selanjutnya', inner_window: 2, outer_window: 0 %>
+  </div>
+</div>

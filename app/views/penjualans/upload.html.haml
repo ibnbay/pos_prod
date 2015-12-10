@@ -1,0 +1,36 @@
+.row
+  .col-md-6
+    .panel.panel-info
+      .panel-heading
+        %b Tambah Penjualan
+        = form_for @penjualan, html: { multipart: true, class: 'form-horizontal' }  do |f|
+          - if @penjualan.errors.any?
+            #errors
+              %p
+                = @penjualan.errors.count
+                Prevented this recipe from savings
+              %ul
+                - @penjualan.errors.full_messages.each do |msg|
+                  %li= msg
+          .panel-body
+            .form-control
+              = f.label :tanggal
+              = f.text_field :tanggal
+            .form-control
+              = f.label :reseller_id
+              = f.select "reseller_id", options_from_collection_for_select(@resellers, "id","name")
+            .form-control
+              = f.label :total
+              = f.text_field :total
+              = f.hidden_field :upload, value: 'true'
+              = f.hidden_field :warning, value: '1'
+            .form-control
+              = label_tag :file
+              = file_field_tag :file
+            .actions
+              = submit_tag 'Import'
+
+
+%br/
+
+= link_to "Back", penjualans_path, class: "btn btn-default"

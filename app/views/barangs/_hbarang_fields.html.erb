@@ -1,0 +1,12 @@
+<div class="form-group">
+  <%= f.label :r_class_id, class:"col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.collection_select(:r_class_id, RClass.all.order("nama ASC"), :id, :nama, {}, {class: "form-control", :prompt => false}) %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :satuan, class:"col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.number_field :satuan, class:"form-control" %>
+  </div>
+</div>

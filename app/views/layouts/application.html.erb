@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PosBower</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container main_content">
+  <div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="active">
+        <a href="#">Login</a>
+      </li>
+      <li>
+        <a href="#about">Daftar</a>
+      </li>
+    </ul>
+  </div>
+  <div class="masthead">
+    <h3 class="text-muted">
+      <a href="#">POS</a>
+    </h3>
+    <nav>
+      <ul class="nav nav-justified">
+        <li>
+          <%= link_to 'Kategori', kategoris_path %>
+        </li>
+        <li>
+          <%= link_to 'Barang', barangs_path %>
+        </li>
+        <li>
+          <%= link_to 'Reseller', resellers_path %>
+        </li>
+        <li>
+          <%= link_to 'Reseller Class', r_classes_path %>
+        </li>
+        <li>
+          <%= link_to 'Penjualan', penjualans_path %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <br>
+  <% if notice.present? %>
+      <aside class="alert alert-info">
+        <%= notice %>
+      </aside>
+  <% end %>
+  <% if alert.present? %>
+      <aside class="alert alert-danger">
+        <%= alert %>
+      </aside>
+  <% end %>
+
+  <%= yield %>
+</div>
+
+
+</body>
+</html>
